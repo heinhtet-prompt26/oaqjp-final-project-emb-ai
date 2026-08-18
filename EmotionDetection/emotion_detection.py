@@ -19,6 +19,17 @@ def emotion_detector(text_to_analyze):
         }
 
     formatted_response = json.loads(response.text)
+
+    if 'emotionPredictions' not in formatted_response or len(formatted_response['emotionPredictions']) == 0:
+        return {
+            'anger': None,
+            'disgust': None,
+            'fear': None,
+            'joy': None,
+            'sadness': None,
+            'dominant_emotion': None
+        }
+
     emotions = formatted_response['emotionPredictions'][0]['emotion']
 
     anger_score = emotions['anger']
